@@ -38,14 +38,16 @@ if 'ddl_calculated' not in st.session_state:
 # Étape 1: Choix du dispositif
 if etape == "1. Choix du dispositif":
     st.header("📋 Étape 1: Comprendre et choisir le dispositif expérimental")
-        col1, col2 = st.columns([1, 1])
-        with col1:
+    
+    col1, col2 = st.columns([1, 1])  # ← 4 spaces (one indent level)
+    
+    with col1:
         st.subheader("Dispositifs disponibles :")
-                dispositif_choisi = st.radio(
+        dispositif_choisi = st.radio(
             "Sélectionnez votre dispositif :",
             [
                 "Bloc Randomisé Complet (BRC)",
-                "Carré Latin", 
+                "Carré Latin",
                 "Dispositif en Split-plot"
             ]
         )
@@ -804,4 +806,5 @@ This CSS makes your app look MUCH better on mobile!
 ```
    Email: your-email@example.com
    Password: [Strong password - mix of letters, numbers, symbols]
+
    Username: agri_experimenter (or your choice)
