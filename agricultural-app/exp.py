@@ -174,7 +174,7 @@ elif etape == "2. Saisie des données":
     else:
         st.header("📊 Étape 2: Saisie des données expérimentales")
         st.write(f"**Dispositif choisi :** {st.session_state.dispositif}")
-         if st.session_state.dispositif == "Bloc Randomisé Complet (BRC)":
+    if st.session_state.dispositif == "Bloc Randomisé Complet (BRC)":
             col1, col2 = st.columns([1, 1])
             with col1:
                 nb_traitements = st.number_input("Nombre de traitements", min_value=2, max_value=10, value=4)
@@ -773,3 +773,4 @@ else:
     st.sidebar.info("Interprétez vos résultats dans le contexte agricole")
 st.sidebar.markdown("---")
 st.sidebar.write("💡 **Conseil :** Prenez le temps de comprendre chaque étape avant de passer à la suivante !")
+
