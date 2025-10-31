@@ -4,12 +4,84 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
 import seaborn as sns
+
 # Configuration de la page
 st.set_page_config(
     page_title="Expérimentation Agricole - Apprentissage",
     page_icon="🌱",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded",
+    menu_items={
+        'Get Help': 'https://github.com/yourusername/agricultural-app',
+        'Report a bug': "https://github.com/yourusername/agricultural-app/issues",
+        'About': "# Agricultural Experimentation Learning App\nVersion 1.0"
+    }
 )
+
+# Mobile detection and optimization
+def is_mobile():
+    """Detect if user is on mobile device"""
+    try:
+        # This is a simple detection, works in most cases
+        return st.session_state.get('mobile_device', False)
+    except:
+        return False
+
+# Add custom CSS for mobile responsiveness
+st.markdown("""
+<style>
+    /* Mobile optimizations */
+    @media (max-width: 768px) {
+        .stButton button {
+            width: 100%;
+            font-size: 16px;
+            padding: 12px;
+        }
+
+        .stNumberInput input {
+            font-size: 16px;
+        }
+
+        .stSelectbox select {
+            font-size: 16px;
+        }
+
+        /* Prevent zoom on input focus (iOS) */
+        input, select, textarea {
+            font-size: 16px !important;
+        }
+    }
+
+    /* Better spacing */
+    .main .block-container {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    /* Improve button visibility */
+    .stButton button {
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 8px;
+        border: none;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: all 0.3s;
+    }
+
+    .stButton button:hover {
+        background-color: #45a049;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        transform: translateY(-2px);
+    }
+
+    /* Success/Error messages */
+    .stSuccess, .stError, .stInfo, .stWarning {
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+</style>
+""", unsafe_allow_html=True)
 # Titre principal
 st.title("🌱 Apprentissage de l'Expérimentation Agricole")
 st.subheader("Comprendre chaque étape avant le calcul de F")
@@ -38,9 +110,7 @@ if 'ddl_calculated' not in st.session_state:
 # Étape 1: Choix du dispositif
 if etape == "1. Choix du dispositif":
     st.header("📋 Étape 1: Comprendre et choisir le dispositif expérimental")
-    
-    col1, col2 = st.columns([1, 1])  # ← 4 spaces (one indent level)
-    
+    col1, col2 = st.columns([1, 1])
     with col1:
         st.subheader("Dispositifs disponibles :")
         dispositif_choisi = st.radio(
@@ -51,28 +121,28 @@ if etape == "1. Choix du dispositif":
                 "Dispositif en Split-plot"
             ]
         )
-                st.session_state.dispositif = dispositif_choisi
-        with col2:
+        st.session_state.dispositif = dispositif_choisi
+    with col2:
         st.subheader("Pourquoi ce choix ?")
         if dispositif_choisi == "Bloc Randomisé Complet (BRC)":
             st.info("""
             **Bloc Randomisé Complet (BRC)**
-                        **Principe :** Contrôler une source de variation connue
-                        **Structure :**
+            **Principe :** Contrôler une source de variation connue
+            **Structure :**
             - Traitements répartis aléatoirement dans chaque bloc
             - Chaque traitement apparaît une fois par bloc
-            
+
             **Sources de variation :**
             - Variation due aux traitements
             - Variation due aux blocs
             - Variation résiduelle (erreur)
             """)
-            
+
         elif dispositif_choisi == "Carré Latin":
             st.info("""
             **Carré Latin**
             **Principe :** Contrôler deux sources de variation
-            
+
             **Structure :**
             - Lignes et colonnes
             - Chaque traitement apparaît une fois par ligne et par colonne
@@ -703,108 +773,3 @@ else:
     st.sidebar.info("Interprétez vos résultats dans le contexte agricole")
 st.sidebar.markdown("---")
 st.sidebar.write("💡 **Conseil :** Prenez le temps de comprendre chaque étape avant de passer à la suivante !")
-import streamlit as st
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy import stats
-import seaborn as sns
-
-# Mobile optimization
-st.set_page_config(
-    page_title="Expérimentation Agricole",
-    page_icon="🌱",
-    layout="wide",
-    initial_sidebar_state="expanded",
-    menu_items={
-        'Get Help': 'https://github.com/yourusername/agricultural-app',
-        'Report a bug': "https://github.com/yourusername/agricultural-app/issues",
-        'About': "# Agricultural Experimentation Learning App\nVersion 1.0"
-    }
-)
-
-# Mobile detection and optimization
-def is_mobile():
-    """Detect if user is on mobile device"""
-    try:
-        # This is a simple detection, works in most cases
-        return st.session_state.get('mobile_device', False)
-    except:
-        return False
-
-# Add custom CSS for mobile responsiveness
-st.markdown("""
-<style>
-    /* Mobile optimizations */
-    @media (max-width: 768px) {
-        .stButton button {
-            width: 100%;
-            font-size: 16px;
-            padding: 12px;
-        }
-        
-        .stNumberInput input {
-            font-size: 16px;
-        }
-        
-        .stSelectbox select {
-            font-size: 16px;
-        }
-        
-        /* Prevent zoom on input focus (iOS) */
-        input, select, textarea {
-            font-size: 16px !important;
-        }
-    }
-    
-    /* Better spacing */
-    .main .block-container {
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-    }
-    
-    /* Improve button visibility */
-    .stButton button {
-        background-color: #4CAF50;
-        color: white;
-        border-radius: 8px;
-        border: none;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        transition: all 0.3s;
-    }
-    
-    .stButton button:hover {
-        background-color: #45a049;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        transform: translateY(-2px);
-    }
-    
-    /* Success/Error messages */
-    .stSuccess, .stError, .stInfo, .stWarning {
-        border-radius: 8px;
-        padding: 1rem;
-        margin: 1rem 0;
-    }
-</style>
-""", unsafe_allow_html=True)
-
-# Rest of your existing code continues here...
-```
-
-This CSS makes your app look MUCH better on mobile!
-
----
-
-<a name="part-2"></a>
-# 🌐 PART 2: GITHUB SETUP & CODE UPLOAD (20 minutes)
-
-## Step 2.1: Create GitHub Account
-
-1. **Go to:** https://github.com
-2. **Click:** "Sign up" (top right)
-3. **Enter details:**
-```
-   Email: your-email@example.com
-   Password: [Strong password - mix of letters, numbers, symbols]
-
-   Username: agri_experimenter (or your choice)
